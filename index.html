@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Face Swap Tool - Free Online Face Swapper</title>
+  <meta name="description" content="Swap faces in images easily using our free AI-powered online face swap tool. Upload two images and download the result instantly." />
+  <meta name="keywords" content="face swap, online face swap tool, photo face changer, AI face swap, drag and drop face swap" />
+  <meta name="author" content="FaceSwapTool.com" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.faceswaptool.com/" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #00f5d4;
+      text-align: center;
+    }
+
+    .ad-space {
+      width: 100%;
+      max-width: 1200px;
+      height: 90px;
+      background-color: #ffffff22;
+      border: 2px dashed #00f5d4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    .upload-section {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .drop-zone {
+      width: 280px;
+      height: 320px;
+      background-color: #1e2a38;
+      border: 2px dashed #00f5d4;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .drop-zone:hover {
+      background-color: #293848;
+      cursor: pointer;
+    }
+
+    .drop-zone input {
+      display: none;
+    }
+
+    .drop-zone p {
+      font-size: 1rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .drop-zone img {
+      max-width: 100%;
+      max-height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+    }
+
+    .swap-btn, .download-btn {
+      padding: 1rem 2rem;
+      background: #00f5d4;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      transition: 0.3s;
+      margin: 1rem;
+    }
+
+    .swap-btn:hover, .download-btn:hover {
+      background: #00cba9;
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      padding: 1rem;
+    }
+
+    #result-canvas {
+      display: none;
+      margin-top: 2rem;
+      max-width: 100%;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      .upload-section {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🧑‍🤝‍🧑 AI Face Swap Tool</h1>
+  </header>
+
+  <!-- Top Ad -->
+  <div class="ad-space">
+    <p>Top Advertisement Space</p>
+  </div>
+
+  <section class="upload-section">
+    <label class="drop-zone" id="face-zone">
+      <input type="file" accept="image/*" onchange="showPreview(event, 'face')" />
+      <p>👤 Upload Face Image<br><small>(Drag & Drop or Click)</small></p>
+    </label>
+
+    <label class="drop-zone" id="target-zone">
+      <input type="file" accept="image/*" onchange="showPreview(event, 'target')" />
+      <p>🖼️ Upload Target Image<br><small>(Drag & Drop or Click)</small></p>
+    </label>
+  </section>
+
+  <button class="swap-btn" onclick="performFaceSwap()">🔄 Swap Faces</button>
+
+  <canvas id="result-canvas"></canvas>
+  <a id="download-link" class="download-btn" style="display:none" download="swapped-image.png">⬇️ Download Swapped Image</a>
+
+  <!-- Bottom Ad -->
+  <div class="ad-space">
+    <p>Bottom Advertisement Space</p>
+  </div>
+
+  <footer>
+    &copy; 2025 <a href="https://www.faceswaptool.com" style="color:#00f5d4;text-decoration:none;">FaceSwapTool.com</a> — All rights reserved.
+  </footer>
+
+  <script>
+    let faceImage = new Image();
+    let targetImage = new Image();
+
+    function showPreview(event, type) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const zone = type === 'face' ? document.getElementById('face-zone') : document.getElementById('target-zone');
+        const oldImg = zone.querySelector("img");
+        if (oldImg) zone.removeChild(oldImg);
+
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        zone.appendChild(img);
+
+        if (type === 'face') faceImage.src = e.target.result;
+        else targetImage.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function performFaceSwap() {
+      if (!faceImage.src || !targetImage.src) {
+        alert("Please upload both images first.");
+        return;
+      }
+
+      const canvas = document.getElementById("result-canvas");
+      const ctx = canvas.getContext("2d");
+
+      faceImage.onload = () => {
+        targetImage.onload = () => {
+          canvas.width = targetImage.width;
+          canvas.height = targetImage.height;
+
+          // Draw target image
+          ctx.drawImage(targetImage, 0, 0);
+
+          // Draw face texture to same relative center on target
+          const x = targetImage.width / 2 - faceImage.width / 4;
+          const y = targetImage.height / 2 - faceImage.height / 4;
+          const w = faceImage.width / 2;
+          const h = faceImage.height / 2;
+
+          ctx.drawImage(faceImage, x, y, w, h);
+
+          canvas.style.display = 'block';
+
+          // Fix download link
+          const downloadLink = document.getElementById("download-link");
+          downloadLink.href = canvas.toDataURL("image/png");
+          downloadLink.style.display = 'inline-block';
+        };
+        targetImage.src = targetImage.src; // force reload
+      };
+      faceImage.src = faceImage.src; // force reload
+    }
+  </script>
+</body>
+
+</html>
