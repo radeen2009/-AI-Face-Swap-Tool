@@ -19,7 +19,7 @@
 
     body {
       margin: 0;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(to right, #000428, #004e92);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -29,8 +29,10 @@
     }
 
     header h1 {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: #00f5d4;
+      text-shadow: 1px 1px 3px #000;
+      margin-bottom: 1rem;
       text-align: center;
     }
 
@@ -38,7 +40,7 @@
       width: 100%;
       max-width: 1200px;
       height: 90px;
-      background-color: #ffffff22;
+      background-color: rgba(255, 255, 255, 0.1);
       border: 2px dashed #00f5d4;
       display: flex;
       justify-content: center;
@@ -58,20 +60,21 @@
     .drop-zone {
       width: 280px;
       height: 320px;
-      background-color: #1e2a38;
+      background: linear-gradient(145deg, #1a2a3a, #2e3e4f);
       border: 2px dashed #00f5d4;
-      border-radius: 12px;
+      border-radius: 15px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
       transition: background 0.3s;
     }
 
     .drop-zone:hover {
-      background-color: #293848;
+      background-color: #35495e;
       cursor: pointer;
     }
 
@@ -95,20 +98,21 @@
     }
 
     .swap-btn, .download-btn {
-      padding: 1rem 2rem;
+      padding: 1rem 2.5rem;
       background: #00f5d4;
       border: none;
       color: #000;
       font-weight: bold;
-      border-radius: 8px;
+      border-radius: 50px;
       font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(0, 245, 212, 0.3);
       transition: 0.3s;
       margin: 1rem;
     }
 
     .swap-btn:hover, .download-btn:hover {
       background: #00cba9;
-      transform: scale(1.05);
+      transform: translateY(-3px);
       cursor: pointer;
     }
 
@@ -125,11 +129,12 @@
       margin-top: 2rem;
       max-width: 100%;
       border-radius: 12px;
+      border: 2px solid #00f5d4;
     }
 
     @media (max-width: 600px) {
       header h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
 
       .upload-section {
@@ -151,8 +156,8 @@
   <div class="ad-space">
     <ins class="adsbygoogle"
       style="display:inline-block;width:100%;height:90px"
-      data-ad-client="ca-app-pub-1433566712666010"
-      data-ad-slot="7060849289"></ins>
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="1111111111"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
@@ -177,8 +182,8 @@
   <div class="ad-space">
     <ins class="adsbygoogle"
       style="display:inline-block;width:100%;height:90px"
-      data-ad-client="ca-app-pub-1433566712666010"
-      data-ad-slot="6815073758"></ins>
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="2222222222"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
