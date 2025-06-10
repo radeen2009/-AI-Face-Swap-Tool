@@ -138,17 +138,22 @@
       }
     }
   </style>
+  <!-- Google AdSense Script Placeholder -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body>
-
   <header>
     <h1>🧑‍🤝‍🧑 AI Face Swap Tool</h1>
   </header>
 
-  <!-- Top Ad -->
+  <!-- Top AdSense Slot -->
   <div class="ad-space">
-    <p>Top Advertisement Space</p>
+    <ins class="adsbygoogle"
+      style="display:inline-block;width:100%;height:90px"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="1111111111"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
   <section class="upload-section">
@@ -168,9 +173,13 @@
   <canvas id="result-canvas"></canvas>
   <a id="download-link" class="download-btn" style="display:none" download="swapped-image.png">⬇️ Download Swapped Image</a>
 
-  <!-- Bottom Ad -->
+  <!-- Bottom AdSense Slot -->
   <div class="ad-space">
-    <p>Bottom Advertisement Space</p>
+    <ins class="adsbygoogle"
+      style="display:inline-block;width:100%;height:90px"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="2222222222"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
   <footer>
@@ -210,32 +219,26 @@
       const canvas = document.getElementById("result-canvas");
       const ctx = canvas.getContext("2d");
 
-      faceImage.onload = () => {
-        targetImage.onload = () => {
-          canvas.width = targetImage.width;
-          canvas.height = targetImage.height;
+      targetImage.onload = () => {
+        canvas.width = targetImage.width;
+        canvas.height = targetImage.height;
+        ctx.drawImage(targetImage, 0, 0);
 
-          // Draw target image
-          ctx.drawImage(targetImage, 0, 0);
-
-          // Draw face texture to same relative center on target
+        faceImage.onload = () => {
           const x = targetImage.width / 2 - faceImage.width / 4;
           const y = targetImage.height / 2 - faceImage.height / 4;
           const w = faceImage.width / 2;
           const h = faceImage.height / 2;
-
           ctx.drawImage(faceImage, x, y, w, h);
 
           canvas.style.display = 'block';
-
-          // Fix download link
           const downloadLink = document.getElementById("download-link");
           downloadLink.href = canvas.toDataURL("image/png");
           downloadLink.style.display = 'inline-block';
         };
-        targetImage.src = targetImage.src; // force reload
+        faceImage.src = faceImage.src;
       };
-      faceImage.src = faceImage.src; // force reload
+      targetImage.src = targetImage.src;
     }
   </script>
 </body>
